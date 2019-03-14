@@ -30,6 +30,33 @@ message.
 		<antcall target="deploy" />
 	</target>
 
+  <target name="portal-impl">
+    <setup-libs />
+		<setup-sdk />
+
+		<delete file="javac.output.txt" />
+
+		<gradle-execute dir="modules" task="deploy">
+			<arg value="--parallel" />
+			<arg value="-Dbuild.profile=portal-pre" />
+			<arg value="-Pforced.deploy.dir=${project.dir}/tmp/lib-pre" />
+		</gradle-execute>
+
+		<ant dir="portal-kernel" inheritAll="false" target="compile" />
+    <ant dir="portal-test" inheritAll="false" target="compile" />
+    <ant dir="util-bridges" inheritAll="false" target="compile" />
+		<ant dir="util-java" inheritAll="false" target="compile" />
+    <ant dir="support-tomcat" inheritAll="false" target="compile" />
+    <ant dir="util-taglib" inheritAll="false" target="compile" />
+		<ant dir="util-slf4j" inheritAll="false" target="compile" />
+    <ant dir="util-slf4j" inheritAll="false" target="compile" />
+		<ant dir="portal-impl" inheritAll="false" target="compile" />
+
+    <ant dir="portal-kernel" inheritAll="false" target="deploy" />
+		<ant dir="portal-impl" inheritAll="false" target="deploy" />
+
+  </target>
+
 	<target name="baseline-current-branch">
 		<java
 			classname="com.liferay.portal.tools.GitUtil"

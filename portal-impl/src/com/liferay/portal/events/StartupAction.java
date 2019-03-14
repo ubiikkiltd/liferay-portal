@@ -106,7 +106,7 @@ public class StartupAction extends SimpleAction {
 			System.out.println(IOUtils.toString(inputStream));
 		}
 
-		System.out.println("Starting " + ReleaseInfo.getReleaseInfo() + "\n");
+		System.out.println("Starting " + ReleaseInfo.getReleaseInfo() + " (Cloubi Patched)\n");
 
 		// Installed patches
 
@@ -169,6 +169,7 @@ public class StartupAction extends SimpleAction {
 
 		// MySQL version
 
+		/*
 		DB db = DBManagerUtil.getDB();
 
 		if ((db.getDBType() == DBType.MYSQL) &&
@@ -180,6 +181,7 @@ public class StartupAction extends SimpleAction {
 
 			System.exit(1);
 		}
+		*/
 
 		// Check required build number
 
@@ -187,7 +189,7 @@ public class StartupAction extends SimpleAction {
 			_log.debug("Check required build number");
 		}
 
-		DBUpgrader.checkRequiredBuildNumber(ReleaseInfo.getParentBuildNumber());
+		// DBUpgrader.checkRequiredBuildNumber(ReleaseInfo.getParentBuildNumber());
 
 		Registry registry = RegistryUtil.getRegistry();
 
@@ -240,7 +242,7 @@ public class StartupAction extends SimpleAction {
 			_log.debug("Verify database");
 		}
 
-		DBUpgrader.verify();
+		// DBUpgrader.verify();
 
 		// Liferay JspFactory
 
